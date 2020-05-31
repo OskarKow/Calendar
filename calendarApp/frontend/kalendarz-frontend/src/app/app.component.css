@@ -1,4 +1,8 @@
-div.app-layout {
-  min-height: 100%;
+.app-layout {
+  position:fixed;
+  top: calc(6% + 3px);
+  left:0;
+  right:0;
+  height: 100%;
   width: 100%;
 }

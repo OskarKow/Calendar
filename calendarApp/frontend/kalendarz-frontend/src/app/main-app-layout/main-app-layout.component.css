@@ -1,0 +1,8 @@
+div {
+  display:flex;
+  flex-direction: column;
+  width: 10%;
+  margin-left: 10px;
+}
+
+

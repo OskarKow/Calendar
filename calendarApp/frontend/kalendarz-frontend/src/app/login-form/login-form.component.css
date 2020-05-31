@@ -1,0 +1,35 @@
+.login-form-container {
+  background-image: url("resources/ramka.png");
+  background-repeat: no-repeat;
+  height:624px;
+  width:400px;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.login-form-container form {
+  position:fixed;
+  top:15%;
+}
+
+.login-form-textfield {
+  border: 3px solid #eac008;
+  margin-top: 20px;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+label {
+    font-weight:bold;
+}

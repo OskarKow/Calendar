@@ -4,3 +4,11 @@ app-root {
   height: 100%;
   width: 100%;
 }
+
+.btn-calendar {
+  color: #f0c400;
+  background-color: #3e3e3d;
+  font-weight:bold;
+  width:100%;
+  margin-top: 20px;
+}
