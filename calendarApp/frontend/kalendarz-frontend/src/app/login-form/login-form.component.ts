@@ -26,7 +26,7 @@ constructor(
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             console.log("Logged in. Reroute.");
-/*            this.router.navigate(['/']);*/
+            this.router.navigate(['/app']);
         }
     }
 
@@ -56,7 +56,7 @@ this.loginForm = this.formBuilder.group({
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate(['/test']);
+                    this.router.navigate(['/app']);
                 },
                 error => {
                     this.error = error.error;
