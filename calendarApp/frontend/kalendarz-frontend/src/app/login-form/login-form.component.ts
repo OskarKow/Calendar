@@ -59,7 +59,7 @@ this.loginForm = this.formBuilder.group({
                     this.router.navigate(['/test']);
                 },
                 error => {
-                    this.error = error;
+                    this.error = error.error;
                     this.loading = false;
                 });
     }

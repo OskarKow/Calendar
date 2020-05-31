@@ -21,7 +21,7 @@ constructor(private http: HttpClient) {
 
     login(username: string, password: string) {
         console.log("Try to log user: " + username + " with pass=" + password)
-        return this.http.get<User>('http://127.0.0.1:8000/calendarApp/authentication?username=' + username + '&password=' + password)
+        return this.http.get<User>('http://127.0.0.1:8000/calendarApp/authentication?login=' + username + '&password=' + password)
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));

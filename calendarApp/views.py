@@ -27,18 +27,17 @@ def get_users(request):
 @csrf_exempt
 def authentication(request):
     if request.method == 'GET':
-        data = {}
         try:
             data = AppUser.objects.get(login=request.GET['login'])
         except ObjectDoesNotExist:
-            return JsonResponse(status=400, content='Login incorrect.', safe=False)
+            return JsonResponse(status=400, data='Login or password is invalid.', safe=False)
 
         password = request.GET['password']
         if data.password != password:
-            return HttpResponse(status=400, content='The password is not correct.')
+            return JsonResponse(status=400, data='Login or password is invalid')
         else:
             serializer = UserSerializer(data, many=False)
-            return HttpResponse(status=200, content=serializer.data)
+            return JsonResponse(status=200, data=serializer.data)
 
 
 @csrf_exempt
@@ -49,14 +48,14 @@ def registration(request):
         except ObjectDoesNotExist:
             pass
         else:
-            return HttpResponse(status=400, content='Given login already exists.')
+            return JsonResponse(status=400, content='Given login already exists.')
 
         try:
             AppUser.objects.get(email=request.POST['email'])
         except ObjectDoesNotExist:
             pass
         else:
-            return HttpResponse(status=400, content='Given e-mail already is signed to account.')
+            return JsonResponse(status=400, content='Account with that email already exists.')
 
         user = AppUser(
             login=request.POST['login'],
@@ -64,6 +63,4 @@ def registration(request):
             email=request.POST['email']
         )
         user.save()
-        return HttpResponse(status=201, content='Account created successful.')
-
-        return JsonResponse('Account created successful.', safe=False)
+        return JsonResponse(status=201, content='Account created successfully.')
