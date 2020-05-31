@@ -23,23 +23,47 @@ def get_users(request):
         serializer = UserSerializer(data, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
 @csrf_exempt
 def authentication(request):
-    logger.info("Test")
     if request.method == 'GET':
         data = {}
         try:
-            data = AppUser.objects.get(login=request.GET['username'])
+            data = AppUser.objects.get(login=request.GET['login'])
         except ObjectDoesNotExist:
-            return JsonResponse("Invalid login or password.", safe=False, status=400)
+            return JsonResponse(status=400, content='Login incorrect.', safe=False)
 
-        username = request.GET['username']
         password = request.GET['password']
-
         if data.password != password:
-            return JsonResponse({'response': 'The password is not correct. Elo'}, safe=False)
+            return HttpResponse(status=400, content='The password is not correct.')
         else:
             serializer = UserSerializer(data, many=False)
-            return JsonResponse(serializer.data, safe=False)
+            return HttpResponse(status=200, content=serializer.data)
 
 
+@csrf_exempt
+def registration(request):
+    if request.method == 'POST':
+        try:
+            AppUser.objects.get(login=request.POST['login'])
+        except ObjectDoesNotExist:
+            pass
+        else:
+            return HttpResponse(status=400, content='Given login already exists.')
+
+        try:
+            AppUser.objects.get(email=request.POST['email'])
+        except ObjectDoesNotExist:
+            pass
+        else:
+            return HttpResponse(status=400, content='Given e-mail already is signed to account.')
+
+        user = AppUser(
+            login=request.POST['login'],
+            password=request.POST['password'],
+            email=request.POST['email']
+        )
+        user.save()
+        return HttpResponse(status=201, content='Account created successful.')
+
+        return JsonResponse('Account created successful.', safe=False)
