@@ -7,6 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 from calendarApp.calendar.users.entities.serializers.UserSerializer import UserSerializer
 from calendarApp.models import AppUser
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def index(request):
     return HttpResponse("Hello, world !!! <strong>PG ETI 2020</strong>")
@@ -21,12 +25,13 @@ def get_users(request):
 
 @csrf_exempt
 def authentication(request):
+    logger.info("Test")
     if request.method == 'GET':
         data = {}
         try:
             data = AppUser.objects.get(login=request.GET['username'])
         except ObjectDoesNotExist:
-            return JsonResponse(False, safe=False)
+            return JsonResponse("Invalid login or password.", safe=False, status=400)
 
         username = request.GET['username']
         password = request.GET['password']
