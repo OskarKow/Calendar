@@ -1,0 +1,54 @@
+<div class="centered">
+  <div class="form-container">
+    <form autocomplete="off" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <input type="text" autocomplete="new-password" formControlName="email" placeholder="Email" class="form-control form-textfield"
+               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email jest wymagany</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" formControlName="username" placeholder="Login" class="form-control form-textfield"
+               [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Login jest wymagany</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" autocomplete="new-password" formControlName="password" placeholder="Hasło"
+               class="form-control form-textfield" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" autocomplete="new-password" formControlName="repeatPassword" placeholder="Powtórz hasło"
+               class="form-control form-textfield" [ngClass]="{ 'is-invalid': submitted && f.repeatPassword.errors }"/>
+        <div *ngIf="submitted && f.repeatPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.repeatPassword.errors.required">Hasło jest wymagane</div>
+          <div *ngIf="f.repeatPassword.errors.mismatchedPasswords">Hasła nie są takie same</div>
+        </div>
+      </div>
+
+      <button [disabled]="loading" class="btn btn-calendar">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Zarejestruj się
+      </button>
+
+      <button type="button" (click)="onSignInClick()" class="btn btn-calendar">
+        Masz już konto ? Zaloguj się
+      </button>
+
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      <div *ngIf="success" class="alert alert-success mt-3 mb-0">
+        Konto zostało utworzone! Możesz się zalogować.
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../models/User';
+import { RegistrationUser } from '../models/RegistrationUser';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -33,5 +34,12 @@ constructor(private http: HttpClient) {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+    }
+
+    register(username: string, email: string, password: string, repeatedPassword: string) {
+        const registrationUser = new RegistrationUser(username, email, password, repeatedPassword);
+        console.log('got data: ' + username + ' ' + email + ' ' + password + ' ' + repeatedPassword);
+
+        return this.http.post<any>('http://127.0.0.1:8000/calendarApp/registration', registrationUser)
     }
 }

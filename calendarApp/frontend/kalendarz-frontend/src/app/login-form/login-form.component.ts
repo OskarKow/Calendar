@@ -64,4 +64,8 @@ this.loginForm = this.formBuilder.group({
                 });
     }
 
+    onRegisterClick() {
+        this.router.navigate(['/register']);
+    }
+
 }

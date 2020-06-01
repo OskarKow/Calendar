@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MainAppLayoutComponent } from './main-app-layout/main-app-layout.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginFormComponent,
-    MainAppLayoutComponent
+    MainAppLayoutComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
