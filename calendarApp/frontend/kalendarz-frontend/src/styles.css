@@ -12,3 +12,36 @@ app-root {
   width:100%;
   margin-top: 20px;
 }
+
+.form-textfield {
+  border: 3px solid #eac008;
+  margin-top: 20px;
+}
+
+.form-container {
+  background-image: url("./resources/ramka.png");
+  background-repeat: no-repeat;
+  height:624px;
+  width:400px;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+}
+
+.form-container form {
+  position:fixed;
+  top:15%;
+  width:20%;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
